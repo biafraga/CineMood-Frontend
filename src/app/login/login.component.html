@@ -8,17 +8,17 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <div class="mb-3">
-          <label for="email" class="form-label">Login</label>
+          <label for="login" class="form-label">Login</label>
           <input 
-            type="email" 
+            type="text" 
             class="form-control" 
-            id="email" 
-            placeholder="Digite seu e-mail" 
-            formControlName="email">
+            id="login" 
+            placeholder="Digite seu login" 
+            formControlName="login">
           
           <small class="text-danger" 
-            *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
-            Por favor, insira um e-mail válido.
+            *ngIf="form.get('login')?.invalid && form.get('login')?.touched">
+            Por favor, insira um login válido.
           </small>
         </div>
 

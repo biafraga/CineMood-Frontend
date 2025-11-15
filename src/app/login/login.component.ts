@@ -25,7 +25,7 @@ export class LoginComponent {
   error = signal<string | null>(null); // Sinal de erro
 
   form = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    login: ['', [Validators.required]],
     senha: ['', [Validators.required]] 
   });
 
@@ -39,14 +39,14 @@ export class LoginComponent {
     this.error.set(null);
 
     try {
-      const { email, senha } = this.form.getRawValue();
-      if (email == null || senha == null) {
-        this.error.set('Email e Senha são obrigatórios');
+      const { login, senha } = this.form.getRawValue();
+      if (login == null || senha == null) {
+        this.error.set('Login e Senha são obrigatórios');
         this.loading.set(false);
         return;
       }
-      await this.authService.login({ email, senha });
-      this.router.navigate(['/lista-usuario']);
+      await this.authService.login({ login, senha });
+      this.router.navigate(['/admin']);
     } catch (err: any) {
       this.error.set(err.message || 'Erro ao realizar login');
     } finally {
