@@ -44,24 +44,11 @@
         <div class="d-grid gap-2 mt-4">
           <button 
             type="submit" 
-            class="btn btn-primary"
+            class="btn btn-secondary"
             [disabled]="form.invalid || loading()">
-            
             Entrar
           </button>
         </div>
-
-        <div class="d-grid mt-2">
-          <a (click)="redirecionaCadastro" class="btn btn-secondary">
-            Cadastre-se (via Click)
-        </a>
-        </div>
-        <div class="d-grid mt-2">
-          <a [routerLink]="['/formulario']" class="btn btn-secondary">
-            Cadastre-se (via RouterLink)
-          </a>
-        </div>
-
       </form>
     </div>
   </div>

@@ -1,0 +1,50 @@
+/*CSS do Login*/
+:host .card {
+  background: rgba(255, 255, 255, 0.25); /* O "vidro" */
+  backdrop-filter: blur(10px);           /* O "embaçado" */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --bs-card-border-width: 0;
+  font-weight: bold;
+  color: #5f5f5f;
+}
+
+:host .form-control {
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  border-radius: 8px;
+}
+
+:host h3 {
+  color: #2b2b2b;
+  font-weight: 600;
+}
+
+/*botão liquid glass*/
+:host .btn-secondary {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  /* Estilos do texto e formato */
+  color: #333;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 10px;
+
+  /* Remove a sombra de foco azul do Bootstrap */
+  box-shadow: none;
+}
+
+/* Efeito suave ao passar o mouse */
+:host .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+}
+
+/* Remove a cor azul de "foco" do Bootstrap */
+:host .btn-secondary:focus {
+  box-shadow: none;
+}
