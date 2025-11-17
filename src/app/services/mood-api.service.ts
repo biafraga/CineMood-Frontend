@@ -23,7 +23,6 @@ export class MoodApiService {
     const response = await firstValueFrom(
       this.http.get<MoodsPaginados>(url, { params })
     );
-
     return response;
   }
 }

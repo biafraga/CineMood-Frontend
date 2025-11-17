@@ -1,0 +1,68 @@
+<div class="modal-header">
+  <h4 class="modal-title">Adicionar filmes</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Fechou no X')"></button>
+</div>
+
+<form [formGroup]="filmeForm" (ngSubmit)="salvar()">
+  
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título</label>
+      <input type="text" class="form-control" id="titulo" placeholder="Digite o título do filme"
+             formControlName="titulo">
+      @if (filmeForm.get('titulo')?.invalid && filmeForm.get('titulo')?.touched) {
+        <small class="text-danger">O título é obrigatório.</small>
+      }
+    </div>
+
+    <div class="row g-3 mb-3 two-cols">
+      <div class="col-md">
+        <label for="ano" class="form-label">Ano</label>
+        <input type="number" class="form-control" id="ano" placeholder="2024"
+               formControlName="anoLancamento">
+        @if (filmeForm.get('anoLancamento')?.invalid && filmeForm.get('anoLancamento')?.touched) {
+          <small class="text-danger">O ano é obrigatório (e deve ser maior que 1888).</small>
+        }
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="sinopse" class="form-label">Sinopse</label>
+      <textarea class="form-control" id="sinopse" rows="3" placeholder="Descreva a sinopse do filme..."
+                formControlName="sinopse"></textarea>
+      @if (filmeForm.get('sinopse')?.invalid && filmeForm.get('sinopse')?.touched) {
+        <small class="text-danger">A sinopse é obrigatória.</small>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label for="poster" class="form-label">URL do poster</label>
+      <input type="text" class="form-control" id="poster" placeholder="https://..."
+             formControlName="posterUrl">
+      @if (filmeForm.get('posterUrl')?.invalid && filmeForm.get('posterUrl')?.touched) {
+        <small class="text-danger">A URL do poster é obrigatória.</small>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label for="frase" class="form-label">Frase de efeito</label>
+      <input type="text" class="form-control" id="frase" placeholder="Uma frase marcante do filme..."
+             formControlName="fraseEfeito">
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn-cancel" (click)="activeModal.dismiss('Clicou em Cancelar')">cancelar</button>
+    <button type="submit" class="btn btn-primary btn-save" 
+        [disabled]="filmeForm.invalid || loading()">
+
+      @if (loading()) {
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span role="status"> Salvando...</span>
+      } @else {
+        <span>Salvar</span>
+      }
+    </button>
+  </div>
+</form>

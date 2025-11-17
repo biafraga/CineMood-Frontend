@@ -1,0 +1,128 @@
+/*Cabeçalho (Título e Botão) */
+.filmes-container {
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 40px 40px 56px;
+}
+
+.filmes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.filmes-header h1 {
+  font-size: 36px; 
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.filmes-header p {
+  font-size: 18px;
+  color: #555;
+  margin: 0;
+}
+
+.btn-add {
+  background: #c881ff; /* Roxo do Figma */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/*Barra de Busca */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 0 16px;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar i {
+  color: #aaa;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 16px 12px;
+  width: 100%;
+  font-size: 17px;
+}
+
+/* Tabela de Filmes */
+.filmes-table {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 28px 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Linha do Cabeçalho (Título, Ano, etc.) */
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr; /* 5 colunas */
+  gap: 16px;
+  padding: 0 20px 18px 20px;
+  border-bottom: 1px solid #eee;
+  font-weight: bold;
+  color: #555;
+  font-size: 19px;
+}
+
+/* Linha de cada Filme */
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr; /* 5 colunas */
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid #f9f9f9;
+  align-items: center;
+  font-size: 16px;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.col-acoes {
+  display: flex;
+  gap: 8px;
+}
+
+/* Botões de Ação (Editar/Excluir) */
+.btn-icon {
+  background: #f4f4f4;
+  border: none;
+  border-radius: 6px;
+  width: 34px;
+  height: 34px;
+  color: #555;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.btn-icon.btn-delete {
+  background: #fde2e2;
+  color: #e74c3c;
+}
+
+.btn-add{
+    font-weight: bold;
+}
+
+.btn-add:hover {
+    background-color: #71dddd;
+}

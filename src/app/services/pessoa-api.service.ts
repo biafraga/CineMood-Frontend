@@ -20,10 +20,9 @@ export class PessoaApiService {
       .set('page', page.toString())
       .set('limit', limit.toString());
 
-      const response = await firstValueFrom(
+    const response = await firstValueFrom(
       this.http.get<PessoasPaginadas>(url, { params })
     );
-
     return response;
   }
 }

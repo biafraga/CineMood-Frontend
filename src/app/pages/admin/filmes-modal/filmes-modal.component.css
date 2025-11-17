@@ -1,0 +1,119 @@
+/* vidro estilo glassmorphism */
+:host ::ng-deep .modal-content {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 10px 4px;
+}
+
+/* header */
+:host ::ng-deep .modal-header {
+  border-bottom: none;
+  padding: 24px 28px 0 28px;
+}
+
+.modal-title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* botão X */
+:host ::ng-deep .btn-close {
+  filter: invert(20%);
+  opacity: 0.6;
+  transform: scale(1.2);
+}
+
+/* body */
+:host ::ng-deep .modal-body {
+  padding: 10px 28px 20px 28px;
+}
+
+/* labels */
+.form-label {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+/* inputs */
+:host ::ng-deep .form-control,
+:host ::ng-deep .form-select {
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 10px;
+  padding: 12px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+:host ::ng-deep .form-control:focus,
+:host ::ng-deep .form-select:focus {
+  border-color: #c881ff;
+  box-shadow: 0 0 0 3px rgba(200, 129, 255, 0.25);
+}
+
+/* agrupar ano + mood */
+.two-cols {
+  display: flex;
+  gap: 16px;
+}
+
+/* textarea */
+#sinopse {
+  height: 110px;
+}
+
+/* footer */
+:host ::ng-deep .modal-footer {
+  border-top: none;
+  padding: 0 28px 28px 28px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* botão cancelar */
+.btn-cancel {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  color: #444;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #f3f3f3;
+}
+
+/* botão salvar */
+.btn-save {
+  background: linear-gradient(90deg, #c881ff, #ff73b9);
+  border: none;
+  color: white;
+  padding: 10px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(200, 129, 255, 0.3);
+  transition: 0.2s;
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(200, 129, 255, 0.35);
+}
+
+/* responsividade */
+@media (max-width: 540px) {
+  .two-cols { flex-direction: column; }
+  :host ::ng-deep .modal-content {
+    margin: 10px;
+  }
+}

@@ -11,3 +11,11 @@ export interface FilmesPaginados {
     data: Filme [];
     total: number;
 }
+
+export interface FilmeCreateDTO {
+  titulo: string;
+  anoLancamento: number;
+  sinopse: string;
+  posterUrl: string;
+  fraseEfeito?: string;
+}
