@@ -1,4 +1,15 @@
 /*CSS do Login*/
+:host {
+  /* Garante que o componente ocupe a tela toda */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  /* O fundo degradê que estava no global */
+  background: linear-gradient(120deg, #fbc2eb 0%, #a6c1ee 100%);
+}
+
 :host .card {
   background: rgba(255, 255, 255, 0.25); /* O "vidro" */
   backdrop-filter: blur(10px);           /* O "embaçado" */

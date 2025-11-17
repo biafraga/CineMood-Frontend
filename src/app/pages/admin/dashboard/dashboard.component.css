@@ -1,0 +1,166 @@
+/* Títulos */
+.dashboard-container {
+  max-width: 960px;          /* largura máxima */
+  width: 100%;
+  margin: 0 auto;            /* centraliza dentro da .content */
+  color: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.dashboard-header h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.dashboard-header p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 32px;
+}
+
+/* A grade para os 3 cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* O estilo de cada card (baseado no Figma) */
+.stat-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* O ícone (bi-film, etc.) */
+.stat-card i {
+  font-size: 36px;
+  color: #c881ff; 
+}
+
+/* O texto (número e label) */
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Título da seção "Últimos filmes" */
+.recent-movies h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 40px; /* Espaço acima */
+  margin-bottom: 20px; /* Espaço abaixo */
+}
+
+/* O card de cada item de filme */
+.movie-item {
+  display: flex;
+  justify-content: space-between; /* Joga o título para a esquerda e o mood para a direita */
+  align-items: center;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 16px; /* Espaço entre os cards */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.movie-title {
+  font-weight: 600;
+  color: #333;
+}
+
+/* pill do mood */
+.movie-mood {
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: linear-gradient(120deg, #fbc2eb, #a6c1ee);
+  color: #fff;
+}
+
+/* se quiser variações de cor pros moods */
+.movie-mood.otimismo {
+  background: linear-gradient(120deg, #fbc2eb, #a6ffe0);
+}
+
+.movie-mood.reflexivo {
+  background: linear-gradient(120deg, #a0c4ff, #bdb2ff);
+}
+
+.movie-mood.empolgado {
+  background: linear-gradient(120deg, #ff9a9e, #fecfef);
+}
+
+/* Responsivo */
+@media (max-width: 992px) {
+  .dashboard-container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .recent-movies {
+    margin-top: 24px;
+  }
+
+  .movie-item {
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-container {
+    padding: 16px 12px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .dashboard-header p {
+    font-size: 14px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 16px 16px;
+  }
+
+  .movie-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .movie-mood-otimista,
+  .movie-mood-reflexivo,
+  .movie-mood-empolgado {
+    align-self: flex-end;
+  }
+}

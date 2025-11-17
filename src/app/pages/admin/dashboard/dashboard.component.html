@@ -1,0 +1,45 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Bem-vindo ao painel administrativo</p>
+  </header>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <i class="bi bi-film"></i>
+      <div class="stat-info">
+        <span class="stat-number">{{ totalFilmes() }}</span>
+        <span class="stat-label">Filmes cadastrados</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <i class="bi bi-people-fill"></i>
+      <div class="stat-info">
+        <span class="stat-number">{{ totalPessoas() }}</span>
+        <span class="stat-label">Pessoas cadastradas</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <i class="bi bi-emoji-smile-fill"></i>
+      <div class="stat-info">
+        <span class="stat-number">{{ totalMoods() }}</span>
+        <span class="stat-label">Moods disponíveis</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="recent-movies">
+    <h2>Últimos filmes adicionados</h2>
+
+    @for (filme of ultimosFilmes(); track filme.id) {
+      <div class="movie-item">
+        <span class="movie-title">{{ filme.titulo }} ({{ filme.anoLancamento }})</span>
+        </div>
+    } @empty {
+      <p class="text-muted">Nenhum filme recente encontrado.</p>
+    }
+
+  </section>
+</div>

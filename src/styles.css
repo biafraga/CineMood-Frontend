@@ -1,13 +1,4 @@
-body {
+html, body {
+  height: 100%;
   margin: 0;
-  padding: 0;
-  height: 100vh; /* Garante que cubra a tela toda */
-
-  /* O gradiente rosa/azul suave */
-  background: linear-gradient(120deg, #fbc2eb 0%, #a6c1ee 100%);
-
-  /* Centraliza o card de login na tela */
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
