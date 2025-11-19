@@ -1,0 +1,148 @@
+/* ===================== PESSOAS PAGE ===================== */
+
+/* container geral da página pessoas */
+.pessoas-container {
+  max-width: 960px;            /* deixa a área mais larga */
+  margin: 0 auto;
+}
+
+/* cabeçalho */
+.pessoas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.pessoas-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.pessoas-header p {
+  font-size: 16px;
+  color: #555;
+  margin: 4px 0 0;
+}
+
+/* botão adicionar */
+.btn-add {
+  background: #c881ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-add:hover {
+  background-color: #71dddd;
+}
+
+/* card principal (igual filmes) */
+.content-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* barra de busca */
+.search-bar {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  padding: 0 16px;
+  margin-bottom: 20px;
+}
+
+.search-bar i {
+  color: #aaa;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 12px 10px;
+  width: 100%;
+  font-size: 15px;
+}
+
+/* ===================== TABELA ===================== */
+
+.pessoas-table {
+  width: 100%;
+}
+
+.pessoas-table .table-header,
+.pessoas-table .table-row {
+  display: grid;
+  grid-template-columns: 5fr 1.5fr;  /* 2 colunas: nome | ações */
+  gap: 16px;
+  align-items: center;
+}
+
+/* cabeçalho */
+.pessoas-table .table-header {
+  padding: 0 4px 12px 4px;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+  color: #555;
+  font-size: 14px;
+}
+
+/* linhas */
+.pessoas-table .table-row {
+  padding: 12px 4px;
+  border-bottom: 1px solid #f7f7f7;
+  font-size: 15px;
+}
+
+.pessoas-table .table-row:last-child {
+  border-bottom: none;
+}
+
+/* nome alinhado à esquerda */
+.pessoas-table .col-nome {
+  text-align: left;
+}
+
+/* ações alinhadas à direita */
+.pessoas-table .col-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* botões de ação */
+.btn-icon {
+  background: #f4f4f4;
+  border: none;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  color: #555;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon.btn-delete {
+  background: #fde2e2;
+  color: #e74c3c;
+}
+
+/* linha de "nenhuma pessoa" ocupa a largura toda */
+.pessoas-table .table-row p {
+  grid-column: 1 / -1;
+  margin: 0;
+}

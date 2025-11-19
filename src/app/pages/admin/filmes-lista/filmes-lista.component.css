@@ -1,36 +1,37 @@
-/*Cabeçalho (Título e Botão) */
 .filmes-container {
-  max-width: 1200px; 
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 40px 40px 56px;
+  padding: 48px 40px 64px;
 }
 
+/* cabeçalho */
 .filmes-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .filmes-header h1 {
-  font-size: 36px; 
+  font-size: 38px;
   font-weight: 700;
-  color: #333;
+  color: #262626;
   margin: 0;
 }
 
 .filmes-header p {
   font-size: 18px;
   color: #555;
-  margin: 0;
+  margin: 4px 0 0;
 }
 
+/* botão adicionar */
 .btn-add {
-  background: #c881ff; /* Roxo do Figma */
+  background: #c881ff;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 14px 24px;
+  border-radius: 10px;
+  padding: 14px 26px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -39,15 +40,19 @@
   gap: 8px;
 }
 
-/*Barra de Busca */
+.btn-add:hover {
+  background-color: #71dddd;
+}
+
+/* barra de busca */
 .search-bar {
   display: flex;
   align-items: center;
   background: #fff;
-  border-radius: 8px;
-  padding: 0 16px;
+  border-radius: 10px;
+  padding: 0 18px;
   margin-bottom: 28px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 .search-bar i {
@@ -62,56 +67,72 @@
   font-size: 17px;
 }
 
-/* Tabela de Filmes */
+/* card da tabela */
 .filmes-table {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 28px 28px 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
-/* Linha do Cabeçalho (Título, Ano, etc.) */
+/* header da tabela */
 .table-header {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr; /* 5 colunas */
+  grid-template-columns: 3fr 1.4fr 2fr 0.9fr 1fr;
   gap: 16px;
-  padding: 0 20px 18px 20px;
+  padding: 0 24px 14px 24px;
   border-bottom: 1px solid #eee;
-  font-weight: bold;
-  color: #555;
-  font-size: 19px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3f3f4d;
 }
 
-/* Linha de cada Filme */
+/* linha da tabela */
 .table-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr; /* 5 colunas */
+  grid-template-columns: 3fr 1.4fr 2fr 0.9fr 1fr;
   gap: 16px;
-  padding: 18px 20px;
-  border-bottom: 1px solid #f9f9f9;
+  padding: 16px 24px;
+  border-bottom: 1px solid #f7f7fb;
   align-items: center;
-  font-size: 16px;
+  font-size: 15px;
+  color: #444;
 }
 
 .table-row:last-child {
   border-bottom: none;
 }
 
+/* colunas específicas */
+.col-titulo {
+  font-weight: 500;
+}
+
+.col-mood,
+.col-diretor,
+.col-ano {
+  font-weight: 400;
+}
+
 .col-acoes {
   display: flex;
   gap: 8px;
+  justify-content: flex-start;
 }
 
-/* Botões de Ação (Editar/Excluir) */
+/* botões de ação */
 .btn-icon {
   background: #f4f4f4;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   width: 34px;
   height: 34px;
   color: #555;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-icon.btn-delete {
@@ -119,10 +140,85 @@
   color: #e74c3c;
 }
 
-.btn-add{
-    font-weight: bold;
+/* tag de mood */
+.tag-mood {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #1f2933;
+  position: relative;
 }
 
-.btn-add:hover {
-    background-color: #71dddd;
+.tag-mood::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+/* fallback */
+.tag-mood--default {
+  background: #f3f4ff;
+  color: #374151;
+}
+
+/* inspirado – verde água / teal */
+.tag-mood--inspirado {
+  background: linear-gradient(135deg, #a6fff0, #33b5b0);
+  color: #064e46;
+}
+
+/* reflexivo – roxo / lilás */
+.tag-mood--reflexivo {
+  background: linear-gradient(135deg, #e4d4ff, #a855f7);
+  color: #3b0764;
+}
+
+/* despreocupado – amarelo/laranja suave */
+.tag-mood--despreocupado {
+  background: linear-gradient(135deg, #fff4c2, #ffd28f);
+  color: #7c2d12;
+}
+
+/* diferentão – verdinho meio ácido */
+.tag-mood--diferentao {
+  background: linear-gradient(135deg, #e3ffb5, #8bcf4c);
+  color: #365314;
+}
+
+/* emocionado – azul */
+.tag-mood--emocionado {
+  background: linear-gradient(135deg, #dbeafe, #60a5fa);
+  color: #1d4ed8;
+}
+
+/* empolgado – amarelo/vermelho */
+.tag-mood--empolgado {
+  background: linear-gradient(135deg, #ffe4b5, #ff7a7a);
+  color: #7c1d1d;
+}
+
+/* nostálgico – rosê queimado + lilás */
+.tag-mood--nostalgico {
+  background: linear-gradient(135deg, #f5c1cf, #b794f4);
+  color: #4b164c;
+}
+
+/* otimista – amarelo clarinho com pêssego */
+.tag-mood--otimista {
+  background: linear-gradient(135deg, #fff7c2, #ffd1a8);
+  color: #713f12;
+}
+
+/* surpreso – azul + roxo mais elétrico */
+.tag-mood--surpreso {
+  background: linear-gradient(135deg, #a5b4fc, #38bdf8);
+  color: #1e3a8a;
 }

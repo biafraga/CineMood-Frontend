@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <h4 class="modal-title">Adicionar pessoa</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Fechou no X')"></button>
+</div>
+
+<form [formGroup]="pessoaForm" (ngSubmit)="salvar()">
+
+  <div class="modal-body">
+    
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome</label>
+      <input type="text" class="form-control" id="nome" placeholder="Nome completo"
+             formControlName="nome">
+      @if (pessoaForm.get('nome')?.invalid && pessoaForm.get('nome')?.touched) {
+        <small class="text-danger">O nome é obrigatório.</small>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label for="biografia" class="form-label">Biografia</label>
+      <textarea class="form-control" id="biografia" rows="3" placeholder="Breve biografia..."
+                formControlName="biografia"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="foto" class="form-label">URL da foto</label>
+      <input type="text" class="form-control" id="foto" placeholder="https://..."
+             formControlName="fotoUrl">
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn-cancel" (click)="activeModal.dismiss('Clicou em Cancelar')">cancelar</button>
+    <button type="submit" class="btn-save" 
+            [disabled]="pessoaForm.invalid || loading()">
+
+      @if (loading()) {
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span role="status"> Salvando...</span>
+      } @else {
+        <span>Salvar</span>
+      }
+    </button>
+  </div>
+</form>

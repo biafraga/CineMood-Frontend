@@ -1,1 +1,46 @@
-<p>pessoas-lista works!</p>
+<div class="pessoas-container">
+  <header class="pessoas-header">
+    <div>
+      <h1>Pessoas</h1>
+      <p>Gerencie atores e diretores</p>
+    </div>
+    <button class="btn-add" (click)="abrirModalAdicionar()">
+      <i class="bi bi-plus-lg"></i>
+      Adicionar Pessoa
+    </button>
+  </header>
+
+  <div class="content-card">
+    <div class="search-bar">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Buscar pessoas..." [formControl]="searchControl">
+    </div>
+
+    <div class="pessoas-table">
+      <div class="table-header">
+        <div class="col-nome">Nome</div>
+        <div class="col-acoes">Ações</div>
+      </div>
+
+      @for (pessoa of pessoas(); track pessoa.id) {
+        <div class="table-row">
+          <div class="col-nome">{{ pessoa.nome }}</div>
+          
+          <div class="col-acoes">
+            <button class="btn-icon" (click)="abrirModalEditar(pessoa)">
+              <i class="bi bi-pencil-fill"></i>
+            </button>
+            <button class="btn-icon btn-delete" (click)="deletarPessoa(pessoa.id)">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </div>
+        </div>
+      } @empty {
+        <div class="table-row">
+          <p class="text-muted p-3">Nenhuma pessoa cadastrada ainda.</p>
+        </div>
+      }
+
+    </div>
+  </div>
+</div>

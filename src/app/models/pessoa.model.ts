@@ -9,3 +9,9 @@ export interface PessoasPaginadas {
     data: Pessoa[];
     total: number;
 }
+
+export interface PessoaCreateDTO {
+  nome: string;
+  biografia?: string;
+  fotoUrl?: string;
+}

@@ -5,6 +5,8 @@ export interface Filme {
     anoLancamento: number;
     posterUrl: string;
     fraseEfeito: string;
+    moods?: string[];
+    diretor?: string;
 }
 
 export interface FilmesPaginados {
@@ -18,4 +20,16 @@ export interface FilmeCreateDTO {
   sinopse: string;
   posterUrl: string;
   fraseEfeito?: string;
+}
+
+export interface AssociarMoodDTO {
+  idFilme: number;
+  idsMood: number[];
+}
+
+export interface AssociarPessoaDTO {
+  idFilme: number;
+  idPessoa: number;
+  papel: 'Diretor' | 'Ator';
+  personagem?: string;
 }

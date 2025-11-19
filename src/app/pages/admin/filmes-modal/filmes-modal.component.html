@@ -1,5 +1,11 @@
 <div class="modal-header">
-  <h4 class="modal-title">Adicionar filmes</h4>
+  <h4 class="modal-title">
+    @if (modoEdicao) {
+      <span>Editar Filme</span>
+    } @else {
+      <span>Adicionar Filme</span>
+    }
+  </h4>
   <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Fechou no X')"></button>
 </div>
 
@@ -15,15 +21,41 @@
       }
     </div>
 
-    <div class="row g-3 mb-3 two-cols">
-      <div class="col-md">
+    <div class="row g-2 mb-3">
+      <div class="col-md-6">
         <label for="ano" class="form-label">Ano</label>
         <input type="number" class="form-control" id="ano" placeholder="2024"
                formControlName="anoLancamento">
         @if (filmeForm.get('anoLancamento')?.invalid && filmeForm.get('anoLancamento')?.touched) {
-          <small class="text-danger">O ano é obrigatório (e deve ser maior que 1888).</small>
+          <small class="text-danger">O ano é obrigatório.</small>
         }
       </div>
+
+      <div class="col-md-6">
+        <label for="mood" class="form-label">Mood</label>
+        <select id="mood" class="form-select" formControlName="idMood">
+          <option [ngValue]="null" selected>Selecione...</option>
+          @for (mood of listaMoods(); track mood.id) {
+            <option [value]="mood.id">{{ mood.nome }}</option>
+          }
+        </select>
+        @if (filmeForm.get('idMood')?.invalid && filmeForm.get('idMood')?.touched) {
+          <small class="text-danger">O Mood é obrigatório.</small>
+        }
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="diretor" class="form-label">Diretor</label>
+      <select id="diretor" class="form-select" formControlName="idDiretor">
+        <option [ngValue]="null" selected>Selecione um diretor...</option>
+        @for (pessoa of listaDiretores(); track pessoa.id) {
+          <option [value]="pessoa.id">{{ pessoa.nome }}</option>
+        }
+      </select>
+      @if (filmeForm.get('idDiretor')?.invalid && filmeForm.get('idDiretor')?.touched) {
+        <small class="text-danger">O Diretor é obrigatório.</small>
+      }
     </div>
 
     <div class="mb-3">
@@ -54,9 +86,8 @@
 
   <div class="modal-footer">
     <button type="button" class="btn-cancel" (click)="activeModal.dismiss('Clicou em Cancelar')">cancelar</button>
-    <button type="submit" class="btn btn-primary btn-save" 
-        [disabled]="filmeForm.invalid || loading()">
-
+    
+    <button type="submit" class="btn-save" [disabled]="filmeForm.invalid || loading()">
       @if (loading()) {
         <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
         <span role="status"> Salvando...</span>
