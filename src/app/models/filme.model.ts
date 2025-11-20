@@ -1,17 +1,16 @@
+// src/app/models/filme.model.ts
 export interface Filme {
-    id: number;
-    titulo: string;
-    sinopse: string;
-    anoLancamento: number;
-    posterUrl: string;
-    fraseEfeito: string;
-    moods?: string[];
-    diretor?: string;
+  id: number;
+  titulo: string;
+  sinopse: string;
+  anoLancamento: number;
+  posterUrl: string;
+  fraseEfeito: string;
 }
 
 export interface FilmesPaginados {
-    data: Filme [];
-    total: number;
+  data: Filme[];
+  total: number;
 }
 
 export interface FilmeCreateDTO {
@@ -20,16 +19,4 @@ export interface FilmeCreateDTO {
   sinopse: string;
   posterUrl: string;
   fraseEfeito?: string;
-}
-
-export interface AssociarMoodDTO {
-  idFilme: number;
-  idsMood: number[];
-}
-
-export interface AssociarPessoaDTO {
-  idFilme: number;
-  idPessoa: number;
-  papel: 'Diretor' | 'Ator';
-  personagem?: string;
 }
