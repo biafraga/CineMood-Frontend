@@ -1,18 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { LoginRequest } from '../models/auth.model';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    RouterLink
-  ],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -21,28 +16,22 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  loading = signal(false); // Sinal de loading
-  error = signal<string | null>(null); // Sinal de erro
+  loading = signal(false);
+  error = signal<string | null>(null);
 
   form = this.fb.group({
     login: ['', [Validators.required]],
-    senha: ['', [Validators.required]] 
+    senha: ['', [Validators.required]]
   });
 
   async onSubmit() {
-
-    if (this.form.invalid) {
-      return;
-    }
-
+    if (this.form.invalid) return;
     this.loading.set(true);
     this.error.set(null);
-
     try {
       const { login, senha } = this.form.getRawValue();
       if (login == null || senha == null) {
         this.error.set('Login e Senha são obrigatórios');
-        this.loading.set(false);
         return;
       }
       await this.authService.login({ login, senha });
@@ -53,6 +42,7 @@ export class LoginComponent {
       this.loading.set(false);
     }
   }
+
   get redirecionaCadastro() {
     this.router.navigate(['/formulario']);
     return true;

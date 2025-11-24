@@ -1,50 +1,43 @@
-import { Component, OnInit, inject, signal, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, Input, Output, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PessoaApiService } from '../../../services/pessoa-api.service';
 import { Pessoa } from '../../../models/pessoa.model';
 
 @Component({
   selector: 'app-pessoas-modal',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './pessoas-modal.component.html',
-  styleUrl: './pessoas-modal.component.css'
+  styleUrls: ['./pessoas-modal.component.css']
 })
 export class PessoasModalComponent implements OnInit {
+  @Input() pessoaParaEditar: Pessoa | null = null;
+  @Output() closed = new EventEmitter<Pessoa | null>(); // devolve a pessoa criada/atualizada, ou null
 
-  @Input() pessoaParaEditar?: Pessoa;
-
-  activeModal = inject(NgbActiveModal);
   private fb = inject(FormBuilder);
-  private pessoaService = inject(PessoaApiService);
+  private pessoaApi = inject(PessoaApiService);
 
   loading = signal(false);
 
   pessoaForm: FormGroup = this.fb.group({
     nome: ['', [Validators.required]],
-    biografia: [''], 
-    fotoUrl: [''], 
+    biografia: [''],
+    fotoUrl: ['']
   });
 
-  get modoEdicao(): boolean {
-    return !!this.pessoaParaEditar;
-  }
-
-  constructor() { }
-
   ngOnInit(): void {
-    if (this.modoEdicao && this.pessoaParaEditar) {
+    if (this.pessoaParaEditar) {
       this.pessoaForm.patchValue({
         nome: this.pessoaParaEditar.nome,
         biografia: this.pessoaParaEditar.biografia,
-        fotoUrl: this.pessoaParaEditar.fotoUrl,
+        fotoUrl: this.pessoaParaEditar.fotoUrl
       });
     }
+  }
+
+  cancelar() {
+    this.closed.emit(null);
   }
 
   async salvar() {
@@ -52,28 +45,19 @@ export class PessoasModalComponent implements OnInit {
     if (this.pessoaForm.invalid) return;
 
     this.loading.set(true);
-
     try {
-      const dadosDoFormulario = this.pessoaForm.value;
+      const dto = this.pessoaForm.value;
 
-      if (this.modoEdicao && this.pessoaParaEditar) {
-        //MODO EDIÇÃO
-        const pessoaAtualizada = await this.pessoaService.atualizarPessoa(
-          this.pessoaParaEditar.id,
-          dadosDoFormulario
-        );
-        this.loading.set(false);
-        this.activeModal.close(pessoaAtualizada); // Devolve a Pessoa ATUALIZADA
-
+      if (this.pessoaParaEditar) {
+        const atualizada = await this.pessoaApi.atualizarPessoa(this.pessoaParaEditar.id, dto);
+        this.closed.emit(atualizada);
       } else {
-        //MODO CRIAÇÃO
-        const pessoaSalva = await this.pessoaService.criarPessoa(dadosDoFormulario);
-        this.loading.set(false);
-        this.activeModal.close(pessoaSalva); // Devolve a Pessoa NOVA
+        const criada = await this.pessoaApi.criarPessoa(dto);
+        this.closed.emit(criada);
       }
-
-    } catch (error) {
-      console.error('Erro ao salvar a pessoa:', error);
+    } catch (e) {
+      console.error('erro ao salvar pessoa', e);
+    } finally {
       this.loading.set(false);
     }
   }

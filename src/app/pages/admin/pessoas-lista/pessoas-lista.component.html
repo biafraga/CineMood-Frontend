@@ -4,9 +4,9 @@
       <h1>Pessoas</h1>
       <p>Gerencie atores e diretores</p>
     </div>
+
     <button class="btn-add" (click)="abrirModalAdicionar()">
-      <i class="bi bi-plus-lg"></i>
-      Adicionar Pessoa
+      <i class="bi bi-plus-lg"></i> Adicionar Pessoa
     </button>
   </header>
 
@@ -25,7 +25,6 @@
       @for (pessoa of pessoas(); track pessoa.id) {
         <div class="table-row">
           <div class="col-nome">{{ pessoa.nome }}</div>
-          
           <div class="col-acoes">
             <button class="btn-icon" (click)="abrirModalEditar(pessoa)">
               <i class="bi bi-pencil-fill"></i>
@@ -40,7 +39,13 @@
           <p class="text-muted p-3">Nenhuma pessoa cadastrada ainda.</p>
         </div>
       }
-
     </div>
   </div>
+
+  <!-- modal inline -->
+  <app-pessoas-modal
+    *ngIf="modalAberto()"
+    [pessoaParaEditar]="pessoaEmEdicao()"
+    (closed)="onModalClosed($event)">
+  </app-pessoas-modal>
 </div>

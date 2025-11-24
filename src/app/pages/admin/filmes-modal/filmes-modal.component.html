@@ -1,59 +1,43 @@
-<div class="modal-header">
-  <h4 class="modal-title">
-    @if (modoEdicao) {
-      Editar Filme
-    } @else {
-      Adicionar Filme
-    }
-  </h4>
-  <button type="button" class="btn-close" aria-label="Close"
-    (click)="activeModal.dismiss('fechou')"></button>
+<div class="modal-backdrop" (click)="fechar()"></div>
+
+<div class="modal-shell">
+  <header class="modal-header">
+    <h4>{{ modoEdicao ? 'editar filme' : 'adicionar filme' }}</h4>
+    <button type="button" class="btn-close" (click)="fechar()">×</button>
+  </header>
+
+  <form [formGroup]="filmeForm" (ngSubmit)="salvar()">
+    <div class="modal-body">
+      <div class="mb-3">
+        <label class="form-label">título *</label>
+        <input class="form-control" formControlName="titulo" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">ano *</label>
+        <input type="number" class="form-control" formControlName="anoLancamento" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">poster (url)</label>
+        <input class="form-control" formControlName="posterUrl" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">sinopse</label>
+        <textarea class="form-control" formControlName="sinopse"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">frase de efeito</label>
+        <input class="form-control" formControlName="fraseEfeito" />
+      </div>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="fechar()">cancelar</button>
+      <button type="submit" class="btn-save" [disabled]="loading()">salvar</button>
+    </footer>
+
+  </form>
 </div>
-
-<form [formGroup]="filmeForm" (ngSubmit)="salvar()">
-  <div class="modal-body">
-
-    <div class="mb-3">
-      <label class="form-label">Título</label>
-      <input type="text" class="form-control" formControlName="titulo">
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Ano</label>
-      <input type="number" class="form-control" formControlName="anoLancamento">
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Sinopse</label>
-      <textarea class="form-control" rows="3" formControlName="sinopse"></textarea>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">URL do Poster</label>
-      <input type="text" class="form-control" formControlName="posterUrl">
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Frase de efeito</label>
-      <input type="text" class="form-control" formControlName="fraseEfeito">
-    </div>
-
-  </div>
-
-  <div class="modal-footer">
-    <button class="btn-cancel" type="button"
-      (click)="activeModal.dismiss('cancelou')">Cancelar</button>
-
-    <button class="btn-save" type="submit"
-      [disabled]="filmeForm.invalid || loading()">
-
-      @if (loading()) {
-        <span class="spinner-border spinner-border-sm"></span>
-        Salvando...
-      } @else {
-        Salvar
-      }
-
-    </button>
-  </div>
-</form>

@@ -1,44 +1,38 @@
-import { Component, inject, OnInit, signal, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PessoasModalComponent } from '../pessoas-modal/pessoas-modal.component';
+import { debounceTime, Subject, takeUntil } from 'rxjs';
+
 import { PessoaApiService } from '../../../services/pessoa-api.service';
 import { Pessoa } from '../../../models/pessoa.model';
-import { Subject, takeUntil, debounceTime } from 'rxjs';
+import { PessoasModalComponent } from '../pessoas-modal/pessoas-modal.component';
 
 @Component({
   selector: 'app-pessoas-lista',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, PessoasModalComponent],
   templateUrl: './pessoas-lista.component.html',
-  styleUrl: './pessoas-lista.component.css'
+  styleUrls: ['./pessoas-lista.component.css']
 })
 export class PessoasListaComponent implements OnInit, OnDestroy {
-
-  private pessoaService = inject(PessoaApiService);
-  private modalService = inject(NgbModal);
+  private pessoaApi = inject(PessoaApiService);
 
   pessoas = signal<Pessoa[]>([]);
   totalPessoas = signal(0);
 
+  // modal inline
+  modalAberto = signal(false);
+  pessoaEmEdicao = signal<Pessoa | null>(null);
+
   searchControl = new FormControl('');
   private destroy$ = new Subject<void>();
 
-  constructor() { }
-
   ngOnInit(): void {
     this.carregarPessoas();
-    
-    this.searchControl.valueChanges.pipe(
-      debounceTime(300),
-      takeUntil(this.destroy$)
-    ).subscribe(termoDeBusca => {
-      this.carregarPessoas(termoDeBusca || undefined);
-    });
+
+    this.searchControl.valueChanges
+      .pipe(debounceTime(300), takeUntil(this.destroy$))
+      .subscribe((q) => this.carregarPessoas(q || undefined));
   }
 
   ngOnDestroy(): void {
@@ -48,58 +42,45 @@ export class PessoasListaComponent implements OnInit, OnDestroy {
 
   async carregarPessoas(nome?: string) {
     try {
-      const response = await this.pessoaService.getPessoas(1, 20, nome); 
-      this.pessoas.set(response.data);
-      this.totalPessoas.set(response.total);
-    } catch (error) {
-      console.error('Erro ao carregar pessoas:', error);
+      const res = await this.pessoaApi.getPessoas(1, 20, nome);
+      this.pessoas.set(res.data ?? []);
+      this.totalPessoas.set(res.total ?? 0);
+    } catch (e) {
+      console.error('erro ao carregar pessoas', e);
     }
   }
 
   abrirModalAdicionar() {
-    const modalRef = this.modalService.open(PessoasModalComponent, {
-      size: 'lg',
-      centered: true
-    });
-
-    modalRef.result.then(
-      (pessoaSalva: Pessoa) => {
-        this.pessoas.update(lista => [pessoaSalva, ...lista]);
-        this.totalPessoas.update(total => total + 1);
-      },
-      () => {}
-    );
+    this.pessoaEmEdicao.set(null);
+    this.modalAberto.set(true);
   }
 
-  //Função de Editar (Caneta)
-  abrirModalEditar(pessoa: Pessoa) {
-    const modalRef = this.modalService.open(PessoasModalComponent, {
-      size: 'lg',
-      centered: true
-    });
-
-    modalRef.componentInstance.pessoaParaEditar = pessoa;
-
-    modalRef.result.then(
-      (pessoaAtualizada: Pessoa) => {
-        this.pessoas.update(lista => 
-          lista.map(p => p.id === pessoaAtualizada.id ? pessoaAtualizada : p)
-        );
-      },
-      () => {}
-    );
+  abrirModalEditar(p: Pessoa) {
+    this.pessoaEmEdicao.set(p);
+    this.modalAberto.set(true);
   }
 
-  // Função de Deletar (Lixeira)
-  async deletarPessoa(idDaPessoa: number) {
-    if (!confirm('Tem certeza que deseja excluir esta pessoa?')) return;
+  onModalClosed(pessoa: Pessoa | null) {
+    this.modalAberto.set(false);
+    if (!pessoa) return;
 
+    // se veio com id que já existe -> atualização; senão, inclusão
+    const exists = this.pessoas().some(x => x.id === pessoa.id);
+    this.pessoas.update(list => {
+      if (exists) return list.map(x => x.id === pessoa.id ? pessoa : x);
+      return [pessoa, ...list];
+    });
+    if (!exists) this.totalPessoas.update(t => t + 1);
+  }
+
+  async deletarPessoa(id: number) {
+    if (!confirm('tem certeza que deseja excluir esta pessoa?')) return;
     try {
-      await this.pessoaService.deletarPessoa(idDaPessoa);
-      this.pessoas.update(lista => lista.filter(p => p.id !== idDaPessoa));
-      this.totalPessoas.update(total => total - 1);
-    } catch (error) {
-      console.error('Erro ao deletar:', error);
+      await this.pessoaApi.deletarPessoa(id);
+      this.pessoas.update(list => list.filter(p => p.id !== id));
+      this.totalPessoas.update(t => Math.max(0, t - 1));
+    } catch (e) {
+      console.error('erro ao deletar pessoa', e);
     }
   }
 }

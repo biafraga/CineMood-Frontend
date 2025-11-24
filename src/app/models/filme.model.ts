@@ -1,4 +1,3 @@
-// src/app/models/filme.model.ts
 export interface Filme {
   id: number;
   titulo: string;

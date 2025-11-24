@@ -1,46 +1,33 @@
-<div class="modal-header">
-  <h4 class="modal-title">Adicionar pessoa</h4>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Fechou no X')"></button>
-</div>
+<div class="modal-backdrop" (click)="cancelar()"></div>
 
-<form [formGroup]="pessoaForm" (ngSubmit)="salvar()">
+<div class="modal-shell">
+  <div class="modal-header">
+    <h4 class="modal-title">{{ pessoaParaEditar ? 'Editar pessoa' : 'Adicionar pessoa' }}</h4>
+    <button type="button" class="btn-close" aria-label="Fechar" (click)="cancelar()">×</button>
+  </div>
 
-  <div class="modal-body">
-    
+  <form [formGroup]="pessoaForm" (ngSubmit)="salvar()" class="modal-body">
     <div class="mb-3">
       <label for="nome" class="form-label">Nome</label>
-      <input type="text" class="form-control" id="nome" placeholder="Nome completo"
-             formControlName="nome">
+      <input id="nome" type="text" class="form-control" placeholder="Nome completo" formControlName="nome">
       @if (pessoaForm.get('nome')?.invalid && pessoaForm.get('nome')?.touched) {
-        <small class="text-danger">O nome é obrigatório.</small>
+        <small class="text-danger">o nome é obrigatório.</small>
       }
     </div>
 
     <div class="mb-3">
-      <label for="biografia" class="form-label">Biografia</label>
-      <textarea class="form-control" id="biografia" rows="3" placeholder="Breve biografia..."
-                formControlName="biografia"></textarea>
+      <label for="bio" class="form-label">Biografia</label>
+      <textarea id="bio" class="form-control" rows="3" placeholder="breve biografia" formControlName="biografia"></textarea>
     </div>
 
     <div class="mb-3">
-      <label for="foto" class="form-label">URL da foto</label>
-      <input type="text" class="form-control" id="foto" placeholder="https://..."
-             formControlName="fotoUrl">
+      <label for="foto" class="form-label">url da foto</label>
+      <input id="foto" type="text" class="form-control" placeholder="https://..." formControlName="fotoUrl">
     </div>
 
-  </div>
-
-  <div class="modal-footer">
-    <button type="button" class="btn-cancel" (click)="activeModal.dismiss('Clicou em Cancelar')">cancelar</button>
-    <button type="submit" class="btn-save" 
-            [disabled]="pessoaForm.invalid || loading()">
-
-      @if (loading()) {
-        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-        <span role="status"> Salvando...</span>
-      } @else {
-        <span>Salvar</span>
-      }
-    </button>
-  </div>
-</form>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="cancelar()">cancelar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="loading()">salvar</button>
+    </div>
+  </form>
+</div>
