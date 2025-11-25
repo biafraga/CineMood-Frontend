@@ -1,0 +1,45 @@
+<div class="home-container">
+  
+  <header class="main-header">
+    
+    <div class="left-section">
+      <a routerLink="/login" class="btn-admin-glass">
+        área admin 🔒
+      </a>
+
+      <nav class="nav-menu">
+        <a href="#" class="nav-link">sobre</a>
+        <a href="#" class="nav-link">catálogo</a>
+      </nav>
+    </div>
+
+    <div class="right-section">
+      <span class="brand-text">CineMood</span>
+      <img src="assets/logo.png" alt="CineMood Logo" class="brand-logo">
+    </div>
+
+  </header>
+
+  <main class="content-wrapper">
+    <div class="hero-text">
+      <h1>Como você quer <br> <span class="highlight">se sentir hoje?</span></h1>
+      <p>Escolha seu mood e o resto é com a gente</p>
+    </div>
+
+    <div class="mood-grid">
+      <button 
+        *ngFor="let mood of moods; let i = index" 
+        class="glass-btn"
+        [class.staggered]="i % 2 !== 0" 
+        [style.--mood-color]="mood.color"
+        (click)="selectMood(mood.id)">
+        {{ mood.label }}
+      </button>
+    </div>
+  </main>
+
+  <footer class="glass-footer">
+    <p>Desenvolvido com 💜 para descobrir filmes através das emoções. Beatriz Fraga 2025</p>
+  </footer>
+
+</div>

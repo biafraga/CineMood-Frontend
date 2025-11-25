@@ -148,3 +148,27 @@
     padding: 16px 12px 32px;
   }
 }
+
+/* BOTÃO DE SAIR */
+.logout-btn{
+  margin-top: 16px;            /* fica logo abaixo do menu */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #4a4a4a;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+}
+.logout-btn:hover{
+  background: rgba(255,255,255,0.4);
+}
+.logout-btn i{
+  font-size: 18px;
+  line-height: 1;
+}

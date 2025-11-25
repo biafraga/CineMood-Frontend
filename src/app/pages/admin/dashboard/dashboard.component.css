@@ -97,19 +97,6 @@
   color: #fff;
 }
 
-/* se quiser variações de cor pros moods */
-.movie-mood.otimismo {
-  background: linear-gradient(120deg, #fbc2eb, #a6ffe0);
-}
-
-.movie-mood.reflexivo {
-  background: linear-gradient(120deg, #a0c4ff, #bdb2ff);
-}
-
-.movie-mood.empolgado {
-  background: linear-gradient(120deg, #ff9a9e, #fecfef);
-}
-
 /* Responsivo */
 @media (max-width: 992px) {
   .dashboard-container {

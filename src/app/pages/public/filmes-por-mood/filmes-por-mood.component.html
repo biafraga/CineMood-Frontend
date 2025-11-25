@@ -1,0 +1,83 @@
+<div class="results-container">
+  
+  <header class="main-header">
+    <div class="left-section">
+      
+      <div class="btn-back" (click)="voltar()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </div>
+
+      <a routerLink="/login" class="btn-admin-glass">
+        área admin 🔒
+      </a>
+
+      <nav class="nav-menu">
+        <a href="#" class="nav-link">sobre</a>
+        <a href="#" class="nav-link">catálogo</a>
+      </nav>
+    </div>
+
+    <div class="right-section">
+      <span class="brand-text">CineMood</span>
+      <img src="assets/logo.png" alt="CineMood Logo" class="brand-logo">
+    </div>
+  </header>
+
+  <main class="content">
+    <h2 class="page-title">
+      Para você se sentir 
+      <span [style.color]="moodColor" class="mood-highlight">{{ moodName }}...</span>
+    </h2>
+
+    <div class="movies-grid">
+      <div 
+        class="movie-card" 
+        *ngFor="let filme of filmesDoMood"
+        (click)="abrirModal(filme)">
+        
+        <div class="poster-wrapper">
+          <img [src]="filme.poster" [alt]="filme.titulo">
+        </div>
+        
+        <div class="card-info" [style.border-bottom-color]="moodColor">
+          <h3>{{ filme.titulo }}</h3>
+          <span>({{ filme.ano }})</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" *ngIf="filmeSelecionado" (click)="fecharModal()">
+    <div class="modal-glass" (click)="$event.stopPropagation()">
+      
+      <button class="close-btn" (click)="fecharModal()">×</button>
+
+      <div class="modal-body">
+        <div class="modal-poster">
+          <img [src]="filmeSelecionado.poster" class="img-fluid">
+        </div>
+
+        <div class="modal-details">
+          <h2>{{ filmeSelecionado.titulo }} <span class="year-badge">({{ filmeSelecionado.ano }})</span></h2>
+          
+          <p class="tagline" [style.color]="moodColor">“{{ filmeSelecionado.frase }}”</p>
+          
+          <p class="sinopse">{{ filmeSelecionado.sinopse }}</p>
+          
+          <div class="cast-section">
+            <strong>Elenco:</strong> 
+            <span> {{ filmeSelecionado.elenco }}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="glass-footer">
+    <p>Beatriz Fraga 2025. Desenvolvido com 💜 para descobrir filmes através das emoções.</p>
+  </footer>
+
+</div>
