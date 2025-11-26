@@ -22,9 +22,13 @@ export class FilmesModalComponent implements OnInit {
 
   filmeForm: FormGroup = this.fb.group({
     titulo: ['', [Validators.required, Validators.minLength(2)]],
-    anoLancamento: [2024, [Validators.required, Validators.min(1888)]],
+    
+    anoLancamento: [new Date().getFullYear(), [Validators.required, Validators.min(1888)]],
+    
     sinopse: [''],
-    posterUrl: ['', [Validators.pattern(/^(https?:\/\/).*\.(jpg|jpeg|png|webp|gif)$/i)]],
+    
+    posterUrl: ['', [Validators.required, Validators.pattern('https?://.+')]],
+    
     fraseEfeito: ['']
   });
 

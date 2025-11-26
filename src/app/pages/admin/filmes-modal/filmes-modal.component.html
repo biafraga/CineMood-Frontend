@@ -2,41 +2,72 @@
 
 <div class="modal-shell">
   <header class="modal-header">
-    <h4>{{ modoEdicao ? 'editar filme' : 'adicionar filme' }}</h4>
+    <h4>{{ modoEdicao ? 'Editar Filme' : 'Adicionar Filme' }}</h4>
     <button type="button" class="btn-close" (click)="fechar()">×</button>
   </header>
 
   <form [formGroup]="filmeForm" (ngSubmit)="salvar()">
     <div class="modal-body">
+      
       <div class="mb-3">
-        <label class="form-label">título *</label>
-        <input class="form-control" formControlName="titulo" />
+        <label class="form-label fw-bold">Título <span class="text-danger">*</span></label>
+        <input 
+          class="form-control" 
+          formControlName="titulo" 
+          [class.is-invalid]="filmeForm.get('titulo')?.invalid && filmeForm.get('titulo')?.touched"
+        />
+        <div class="text-danger small mt-1" *ngIf="filmeForm.get('titulo')?.invalid && filmeForm.get('titulo')?.touched">
+          O título é obrigatório.
+        </div>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">ano *</label>
-        <input type="number" class="form-control" formControlName="anoLancamento" />
+        <label class="form-label fw-bold">Ano de Lançamento <span class="text-danger">*</span></label>
+        <input 
+          type="number" 
+          class="form-control" 
+          formControlName="anoLancamento" 
+          [class.is-invalid]="filmeForm.get('anoLancamento')?.invalid && filmeForm.get('anoLancamento')?.touched"
+        />
+        <div class="text-danger small mt-1" *ngIf="filmeForm.get('anoLancamento')?.invalid && filmeForm.get('anoLancamento')?.touched">
+          Ano inválido.
+        </div>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">poster (url)</label>
-        <input class="form-control" formControlName="posterUrl" />
+        <label class="form-label fw-bold">Poster (URL) <span class="text-danger">*</span></label>
+        <input 
+          class="form-control" 
+          formControlName="posterUrl" 
+          placeholder="Ex: https://site.com/imagem.jpg"
+          [class.is-invalid]="filmeForm.get('posterUrl')?.invalid && filmeForm.get('posterUrl')?.touched"
+        />
+        <div class="text-danger small mt-1" *ngIf="filmeForm.get('posterUrl')?.invalid && filmeForm.get('posterUrl')?.touched">
+          <span *ngIf="filmeForm.get('posterUrl')?.errors?.['required']">O link da imagem é obrigatório.</span>
+          <span *ngIf="filmeForm.get('posterUrl')?.errors?.['pattern']">Precisa ser um link válido (começando com http:// ou https://).</span>
+        </div>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">sinopse</label>
-        <textarea class="form-control" formControlName="sinopse"></textarea>
+        <label class="form-label fw-bold">Sinopse</label>
+        <textarea class="form-control" formControlName="sinopse" rows="3"></textarea>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">frase de efeito</label>
-        <input class="form-control" formControlName="fraseEfeito" />
+        <label class="form-label fw-bold">Frase de Efeito</label>
+        <input class="form-control" formControlName="fraseEfeito" placeholder="Ex: Que a Força esteja com você" />
       </div>
     </div>
 
     <footer class="modal-footer">
-      <button type="button" class="btn-cancel" (click)="fechar()">cancelar</button>
-      <button type="submit" class="btn-save" [disabled]="loading()">salvar</button>
+      <button type="button" class="btn-cancel" (click)="fechar()">Cancelar</button>
+      
+      <button 
+        type="submit" 
+        class="btn-save" 
+        [disabled]="filmeForm.invalid || loading()">
+        {{ loading() ? 'Salvando...' : 'Salvar' }}
+      </button>
     </footer>
 
   </form>
