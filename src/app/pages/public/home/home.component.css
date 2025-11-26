@@ -72,6 +72,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
+  transition: opacity 0.3s;
 }
 
 .brand-text {
@@ -108,7 +110,8 @@
 }
 
 .highlight {
-  background: linear-gradient(90deg, #ff00cc 0%, #ff3300 100%);
+  background: linear-gradient(135deg, #f86a8e 0%, #d977f7 100%);
+  filter: drop-shadow(0 0 10px rgba(212, 89, 250, 0.3));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -9,6 +9,9 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { FilmesListaComponent } from './pages/admin/filmes-lista/filmes-lista.component';
 import { PessoasListaComponent } from './pages/admin/pessoas-lista/pessoas-lista.component';
 
+import { SobreComponent } from './pages/public/sobre/sobre.component';
+import { CatalogoComponent } from './pages/public/catalogo/catalogo.component';
+
 import { authGuard } from './core/guards/auth.guard';
 
 
@@ -24,6 +27,12 @@ export const routes: Routes = [
   { 
     path: 'filmes/mood/:id', 
     component: FilmesPorMoodComponent 
+  },
+  { 
+    path: 'sobre', component: SobreComponent
+  },
+  {
+     path: 'catalogo', component: CatalogoComponent
   },
   { 
     path: 'admin', 

@@ -82,6 +82,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
+  transition: opacity 0.3s;
 }
 
 .brand-text {
