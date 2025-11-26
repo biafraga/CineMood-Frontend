@@ -1,59 +1,97 @@
-# Frontend
+# 🎬 CineMood - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
 
-## Development server
+> **"Como você quer se sentir hoje?"**
 
-To start a local development server, run:
+O **CineMood** é uma plataforma web de descoberta de filmes que foge dos filtros tradicionais por gênero. Aqui, a curadoria é baseada em **emoções**. O usuário escolhe um "mood" (estado de espírito) e recebe recomendações perfeitas para aquele momento.
 
-```bash
-ng serve
-```
+Este projeto foi desenvolvido como parte do **Projeto Integrador** do curso de **Análise e Desenvolvimento de Sistemas**.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## ✨ Funcionalidades
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 🌍 Área Pública (Usuário)
+* **Seleção de Moods:** Interface interativa com botões em estilo *Glassmorphism* para escolha de emoções (Otimista, Nostálgico, Reflexivo, etc.).
+* **Curadoria de Filmes:** Listagem visual de filmes filtrados pela emoção escolhida.
+* **Detalhes do Filme:** Modal imersivo com sinopse, elenco, ano e frase de efeito.
+* **Catálogo Completo:** Busca em tempo real por título de filme.
+* **Design Responsivo:** Adaptado para desktop e dispositivos móveis.
 
-```bash
-ng generate component component-name
-```
+### 🔒 Área Administrativa (Admin)
+* **Autenticação Segura:** Login com validação e proteção de rotas (Guards).
+* **Dashboard:** Visão geral do sistema.
+* **CRUD de Filmes:** Adicionar, Editar e Excluir filmes do catálogo.
+* **Validações:** Formulários reativos com validação de campos obrigatórios e URLs.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 🎨 Design & UI
 
-## Building
+O projeto utiliza uma identidade visual moderna baseada no **Glassmorphism** (Efeito de vidro fosco), com gradientes suaves em tons pastéis (Lilás, Rosa, Azul) e tipografia limpa (**Poppins**).
 
-To build the project run:
+* **Interatividade:** Efeitos de hover, transições suaves e feedbacks visuais.
+* **Componentização:** Uso de componentes independentes e reutilizáveis.
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🚀 Tecnologias Utilizadas
 
-## Running unit tests
+* **Framework:** [Angular 17+](https://angular.io/)
+* **Arquitetura:** Standalone Components (sem NgModules).
+* **Linguagem:** TypeScript.
+* **Estilização:** CSS3 Puro (Variáveis CSS, Flexbox, Grid).
+* **Consumo de API:** HttpClient & RxJS.
+* **Gerenciamento de Rotas:** Angular Router.
+* **Validação:** Reactive Forms.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+## 📦 Pré-requisitos
 
-## Running end-to-end tests
+Antes de começar, certifique-se de ter instalado:
+* [Node.js](https://nodejs.org/) (v18 ou superior)
+* [Angular CLI](https://github.com/angular/angular-cli) (`npm install -g @angular/cli`)
+* **Backend do CineMood:** O frontend precisa da API rodando na porta `3000`.
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## 🔧 Instalação e Execução
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/SEU-USUARIO/CineMood-Frontend.git](https://github.com/SEU-USUARIO/CineMood-Frontend.git)
+    cd CineMood-Frontend
+    ```
 
-## Additional Resources
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3.  **Rode o servidor de desenvolvimento:**
+    ```bash
+    ng serve -o
+    ```
+    *O comando `-o` abrirá automaticamente o navegador em `http://localhost:4200/`.*
+
+---
+
+## 📂 Estrutura de Pastas
+
+```text
+src/
+├── app/
+│   ├── core/           # Guards e Interceptors (Auth)
+│   ├── models/         # Interfaces TypeScript (Filme, Login)
+│   ├── pages/
+│   │   ├── admin/      # Área logada (CRUD, Dashboard)
+│   │   └── public/     # Área pública (Home, Catálogo, Sobre)
+│   ├── services/       # Comunicação com a API
+│   └── shared/         # Componentes compartilhados
+├── assets/             # Imagens e ícones
+└── styles.css          # Estilos globais
