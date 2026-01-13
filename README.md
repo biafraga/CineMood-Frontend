@@ -64,7 +64,7 @@ Antes de começar, certifique-se de ter instalado:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/SEU-USUARIO/CineMood-Frontend.git](https://github.com/SEU-USUARIO/CineMood-Frontend.git)
+    git clone [https://github.com/biafraga/CineMood-Frontend.git](https://github.com/biafraga/CineMood-Frontend.git)
     cd CineMood-Frontend
     ```
 
