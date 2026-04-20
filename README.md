@@ -97,6 +97,8 @@ src/
 └── styles.css          # Estilos globais
 
 ---
+
+
 ## 📄 Documentação do Projeto
 
 * 📊 [Diagrama de Classes](CineMood-Diagrama-de-classes.pdf)
