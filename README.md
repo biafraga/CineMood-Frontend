@@ -95,3 +95,10 @@ src/
 │   └── shared/         # Componentes compartilhados
 ├── assets/             # Imagens e ícones
 └── styles.css          # Estilos globais
+
+---
+## 📄 Documentação do Projeto
+
+* 📊 [Diagrama de Classes](CineMood-Diagrama-de-classes.pdf)
+* 📋 [Casos de Uso](CineMood-Casos-de-Uso.pdf)
+* 🗄️ [Script SQL](cineMood.sql)
